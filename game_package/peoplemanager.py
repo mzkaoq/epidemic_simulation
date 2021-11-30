@@ -3,7 +3,7 @@ from game_package.person import Person
 import random
 from game_package.constant import SCALE, CHANCE_OF_CHANGING_DIRECTION, NUMBER_OF_PEOPLE, AREA
 from game_package.contagion_manager import ConstagionManager
-
+from game_package.persons import State,SickSymptoms,SickNo,Healthy,Protected
 
 class PeopleManager:
     def __init__(self):
@@ -40,34 +40,34 @@ class PeopleManager:
     def appender(self):
         x = random.randint(1, 5)
         x2 =random.uniform(0, 1)
-        if x2 < 0.1:  #zmienic na 0.1
-            is_not_sick = False
-            symptoms = False
+        if x2 < 0.05:  #zmienic na 0.1
+            state = SickSymptoms()
+        elif x2 < 0.1:
+            state = SickNo()
+        elif x2 < 0.2:
+            state = Protected()
         else:
-            is_not_sick = True
-            symptoms = False
-        if x2 < 0.05:
-            symptoms = True
+            state = Healthy()
 
         if x == 1:
-            person_storage = Person(random.randint(0, AREA * SCALE), 0, is_not_sick, symptoms)
+            person_storage = Person(random.randint(0, AREA * SCALE), 0, state)
             PeopleList().list_of_people.append(person_storage)
-            if is_not_sick == False:
+            if isinstance(person_storage.state,SickSymptoms) or isinstance(person_storage.state,SickSymptoms):
                 ConstagionManager().list_of_sick_updater(person_storage)
         elif x == 2:
-            person_storage = Person(random.randint(0, AREA * SCALE), AREA * SCALE, is_not_sick, symptoms)
+            person_storage = Person(random.randint(0, AREA * SCALE), AREA * SCALE, state)
             PeopleList().list_of_people.append(person_storage)
-            if is_not_sick == False:
+            if isinstance(person_storage.state,SickSymptoms) or isinstance(person_storage.state,SickSymptoms):
                 ConstagionManager().list_of_sick_updater(person_storage)
         elif x == 3:
-            person_storage = Person(0, random.randint(0, AREA * SCALE), is_not_sick, symptoms)
+            person_storage = Person(0, random.randint(0, AREA * SCALE), state)
             PeopleList().list_of_people.append(person_storage)
-            if is_not_sick == False:
+            if isinstance(person_storage.state,SickSymptoms) or isinstance(person_storage.state,SickSymptoms):
                 ConstagionManager().list_of_sick_updater(person_storage)
         elif x == 4:
-            person_storage = Person(AREA * SCALE, random.randint(0, AREA * SCALE), is_not_sick, symptoms)
+            person_storage = Person(AREA * SCALE, random.randint(0, AREA * SCALE), state)
             PeopleList().list_of_people.append(person_storage)
-            if is_not_sick == False:
+            if isinstance(person_storage.state,SickSymptoms) or isinstance(person_storage.state,SickSymptoms):
                 ConstagionManager().list_of_sick_updater(person_storage)
 
 
