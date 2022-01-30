@@ -1,6 +1,6 @@
 # epidemic_simulation
 
-👋I created a simple simulation that shows how people are infected with each other
+👋I created a simple simulation in python using pygame library that shows how people are infected with each other
 
 colors means in wich state is a person:
 -green - healthy person - can be infected
